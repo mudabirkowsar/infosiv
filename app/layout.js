@@ -2,7 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,7 +82,8 @@ export default function RootLayout({ children }) {
                   </li>
                   <li className="flex items-center gap-3">
                     <Mail size={18} className="text-blue-500 shrink-0" />
-                    <span>contact@infosiv.com</span>
+                    <span>gunjan@infosiv.com</span>
+                    <span>info@infosiv.com</span>
                   </li>
                 </ul>
               </div>
@@ -92,8 +93,8 @@ export default function RootLayout({ children }) {
             <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
               <p>© {new Date().getFullYear()} Infosiv Technologies. All Rights Reserved.</p>
               <div className="flex space-x-6">
-                <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
-                <Link href="/terms" className="hover:text-white">Terms of Service</Link>
+                <Link href="/" className="hover:text-white">Privacy Policy</Link>
+                <Link href="/" className="hover:text-white">Terms of Service</Link>
               </div>
             </div>
           </div>
