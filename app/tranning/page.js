@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { 
   Code2, 
   Terminal, 
@@ -58,6 +59,7 @@ const roadmap = [
 ];
 
 export default function TrainingPage() {
+  const router = useRouter()
   return (
     <div className="bg-white min-h-screen">
       
@@ -151,7 +153,9 @@ export default function TrainingPage() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                   <button className="flex-1 bg-slate-950 text-white py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all flex items-center justify-center gap-2 group-hover:shadow-xl">
+                   <button
+                    onClick={()=> router.push('/contact')}
+                    className="flex-1 bg-slate-950 text-white py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all flex items-center justify-center gap-2 group-hover:shadow-xl">
                      Enroll Now <ArrowRight size={18} />
                    </button>
                    <button className="px-6 py-4 border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50 transition-all flex items-center justify-center gap-2">

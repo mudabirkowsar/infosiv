@@ -11,6 +11,7 @@ import {
   Code2, 
   Database 
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const services = [
   {
@@ -59,6 +60,7 @@ const cardVariants = {
 };
 
 export default function Services() {
+  const router = useRouter();
   return (
     <section id="services" className="py-24 bg-white relative overflow-hidden">
       {/* Background decoration to match the logo vibe */}
@@ -159,7 +161,9 @@ export default function Services() {
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">Have a project in mind?</h3>
             <p className="text-blue-100 mb-8 max-w-xl mx-auto">Let’s discuss how Infosiv can help you innovate, solve, and transform your business goals.</p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors">
+            <button 
+            onClick={()=> router.push("/contact")}
+            className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors">
               Get Started Today
             </button>
           </div>

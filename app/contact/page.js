@@ -4,16 +4,41 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, Phone, MapPin, Send, 
   CheckCircle2, Sparkles, MessageCircle, 
-  ExternalLink, ArrowRight
+  ExternalLink, ArrowRight, AlertCircle
 } from 'lucide-react';
 
 export default function ContactPage() {
-  const [status, setStatus] = useState("idle"); // idle, loading, success
+  // Status states: idle, loading, success, error
+  const [status, setStatus] = useState("idle"); 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setStatus("loading");
-    setTimeout(() => setStatus("success"), 1500);
+    
+    const formData = new FormData(event.target);
+
+    // Your Web3Forms Access Key
+    formData.append("access_key", "800e9ec6-d6d6-41b3-a1f0-55621cff9dce");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus("success");
+        event.target.reset(); // Clear form on success
+      } else {
+        console.log("Error", data);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.log("Error", error);
+      setStatus("error");
+    }
   };
 
   const containerVariants = {
@@ -33,7 +58,7 @@ export default function ContactPage() {
       <div className="absolute top-0 left-0 w-full h-[500px] bg-slate-950 -z-10 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_20%_30%,_rgba(37,99,235,0.15)_0%,_transparent_50%)]" />
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent" />
-        {/* Animated Pixel Grid (Branding) */}
+        {/* Animated Pixel Grid */}
         <div className="absolute top-20 right-20 grid grid-cols-4 gap-2 opacity-20 rotate-12">
             {[...Array(12)].map((_, i) => (
               <motion.div 
@@ -116,8 +141,8 @@ export default function ContactPage() {
               <AnimatePresence>
                 {status === "success" && (
                   <motion.div 
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    className="absolute inset-0 z-50 bg-white/90 backdrop-blur-md rounded-[3.5rem] flex flex-col items-center justify-center text-center p-10"
+                    initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+                    className="absolute inset-0 z-50 bg-white/95 backdrop-blur-md rounded-[3.5rem] flex flex-col items-center justify-center text-center p-10"
                   >
                     <div className="w-24 h-24 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl shadow-green-200 mb-8">
                        <CheckCircle2 size={48} />
@@ -129,15 +154,15 @@ export default function ContactPage() {
                 )}
               </AnimatePresence>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={onSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
-                    <input required type="text" placeholder="Alex Rivera" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium" />
+                    <input name="name" required type="text" placeholder="Alex Rivera" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Work Email</label>
-                    <input required type="email" placeholder="alex@company.com" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium" />
+                    <input name="email" required type="email" placeholder="alex@company.com" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium" />
                   </div>
                 </div>
 
@@ -146,7 +171,7 @@ export default function ContactPage() {
                   <div className="flex flex-wrap gap-3">
                     {["Software Project", "Industrial Training", "Corporate Workshop", "Career"].map((choice) => (
                       <label key={choice} className="cursor-pointer">
-                         <input type="radio" name="interest" className="peer hidden" defaultChecked={choice === "Software Project"} />
+                         <input type="radio" name="interest" value={choice} className="peer hidden" defaultChecked={choice === "Software Project"} />
                          <div className="px-6 py-3 rounded-full border border-slate-100 bg-slate-50 text-slate-500 text-sm font-bold peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 transition-all">
                            {choice}
                          </div>
@@ -157,12 +182,19 @@ export default function ContactPage() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Briefly tell us more</label>
-                  <textarea required rows="4" placeholder="How can Infosiv help you innovate?" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium resize-none" />
+                  <textarea name="message" required rows="4" placeholder="How can Infosiv help you innovate?" className="w-full bg-slate-50 border-0 border-b-2 border-slate-100 py-4 focus:border-blue-600 focus:bg-white focus:ring-0 transition-all placeholder:text-slate-300 font-medium resize-none" />
                 </div>
+
+                {status === "error" && (
+                  <div className="flex items-center gap-2 text-red-500 bg-red-50 p-4 rounded-xl text-sm font-bold">
+                    <AlertCircle size={18} /> Something went wrong. Please try again.
+                  </div>
+                )}
 
                 <button 
                   disabled={status === "loading"}
-                  className="w-full bg-slate-950 text-white py-6 rounded-[2rem] font-black text-lg tracking-tight hover:bg-blue-600 hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-3 disabled:bg-slate-400"
+                  type="submit"
+                  className="w-full bg-slate-950 text-white py-6 rounded-[2rem] font-black text-lg tracking-tight hover:bg-blue-600 hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-3 disabled:bg-slate-400 disabled:cursor-not-allowed"
                 >
                   {status === "loading" ? "Processing..." : "Initiate Conversation"}
                   <Send size={20} className={status === "loading" ? "animate-pulse" : ""} />

@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Laptop, Rocket, CheckCircle2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const fadeIn = {
@@ -9,6 +10,7 @@ const Hero = () => {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
   };
+  const router = useRouter();
 
   const techStack = [
     "MERN Stack", "Next.js", "React Native", "Flutter", "Python", "PHP"
@@ -65,11 +67,15 @@ const Hero = () => {
             </motion.div>
 
             <motion.div variants={fadeIn} className="mt-10 flex flex-col sm:flex-row gap-4">
-              <button className="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-bold transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200 flex items-center justify-center gap-2">
+              <button 
+              onClick={()=> router.push("/services")}
+              className="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-bold transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-200 flex items-center justify-center gap-2">
                 Our Services
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 rounded-xl font-bold transition-all hover:border-blue-600 hover:text-blue-600">
+              <button 
+              onClick={()=> router.push("/tranning")}
+              className="px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 rounded-xl font-bold transition-all hover:border-blue-600 hover:text-blue-600">
                 Join Training Program
               </button>
             </motion.div>

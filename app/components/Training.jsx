@@ -10,6 +10,7 @@ import {
   ArrowRight, 
   Download 
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const courses = [
   {
@@ -51,6 +52,7 @@ const courses = [
 ];
 
 export default function Training() {
+  const router = useRouter();
   return (
     <section id="training" className="py-24 bg-slate-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,7 +129,9 @@ export default function Training() {
                   </div>
 
                   <div className="mt-10 flex gap-3">
-                    <button className="flex-1 bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+                    <button 
+                    onClick={()=> router.push("/tranning")}
+                    className="flex-1 bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
                       Enroll Now <ArrowRight size={16}/>
                     </button>
                     <button className="p-3 border border-slate-200 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors" title="Download Syllabus">
