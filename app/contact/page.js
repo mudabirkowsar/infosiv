@@ -107,12 +107,12 @@ export default function ContactPage() {
                  <MessageCircle className="text-blue-500" /> Quick Support
                </h3>
                <div className="space-y-4">
-                  <a href="mailto:hello@infosiv.com" className="flex items-center justify-between p-4 bg-white/5 rounded-2xl hover:bg-blue-600 transition-all group/item">
-                    <span className="text-sm font-medium">hello@infosiv.com</span>
+                  <a href="mailto:info@infosiv.com" className="flex items-center justify-between p-4 bg-white/5 rounded-2xl hover:bg-blue-600 transition-all group/item">
+                    <span className="text-sm font-medium">info@infosiv.com</span>
                     <ExternalLink size={16} className="opacity-0 group-hover/item:opacity-100 transition-opacity" />
                   </a>
-                  <a href="tel:+919876543210" className="flex items-center justify-between p-4 bg-white/5 rounded-2xl hover:bg-blue-600 transition-all group/item">
-                    <span className="text-sm font-medium">+91 98765 43210</span>
+                  <a href="tel:+917696591560" className="flex items-center justify-between p-4 bg-white/5 rounded-2xl hover:bg-blue-600 transition-all group/item">
+                    <span className="text-sm font-medium">+91 7696591560</span>
                     <Phone size={16} className="opacity-0 group-hover/item:opacity-100 transition-opacity" />
                   </a>
                </div>
@@ -122,7 +122,8 @@ export default function ContactPage() {
             <motion.div variants={itemVariants} className="p-8 bg-blue-600 rounded-[2.5rem] text-white relative overflow-hidden group h-[200px]">
                <MapPin className="absolute -bottom-4 -right-4 w-32 h-32 opacity-10 group-hover:scale-110 transition-transform" />
                <h4 className="text-xs font-bold uppercase tracking-widest opacity-80">Our HQ</h4>
-               <p className="mt-4 text-2xl font-bold leading-tight">Digital Valley, <br /> Bangalore, India</p>
+               {/* <span>Mohali, phase 8B Industrial area, Sector 91, <br />Sahibzada Ajit singh Nagar Punjab</span> */}
+               <p className="mt-4 text-2xl font-bold leading-tight">Mohali, phase 8B Industrial area, Sector 91,<br /> Sahibzada Ajit singh Nagar Punjab</p>
                <button className="mt-4 text-sm font-bold flex items-center gap-1 hover:underline">
                  View on Maps <ArrowRight size={14} />
                </button>

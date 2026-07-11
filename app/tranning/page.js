@@ -89,9 +89,9 @@ export default function TrainingPage() {
               <button className="bg-white text-slate-950 px-10 py-4 rounded-2xl font-bold hover:bg-blue-500 hover:text-white transition-all shadow-2xl">
                 Explore Courses
               </button>
-              <button className="bg-transparent text-white border border-slate-700 px-10 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all">
+              {/* <button className="bg-transparent text-white border border-slate-700 px-10 py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all">
                 Download Brochure
-              </button>
+              </button> */}
             </div>
           </motion.div>
         </div>
@@ -158,9 +158,9 @@ export default function TrainingPage() {
                     className="flex-1 bg-slate-950 text-white py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all flex items-center justify-center gap-2 group-hover:shadow-xl">
                      Enroll Now <ArrowRight size={18} />
                    </button>
-                   <button className="px-6 py-4 border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+                   {/* <button className="px-6 py-4 border border-slate-200 rounded-2xl text-slate-500 hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
                      <Download size={18} /> Syllabus
-                   </button>
+                   </button> */}
                 </div>
               </div>
             </motion.div>
